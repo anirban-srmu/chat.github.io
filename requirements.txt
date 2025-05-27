@@ -1,4 +1,6 @@
-flask
+Flask
 flask_socketio
-flask_login 
-flask_bcrypt
+Flask-Login
+Flask-Bcrypt
+gunicorn
+eventlet  # Required for Flask-SocketIO on production
