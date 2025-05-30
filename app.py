@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456'
 
-socketio = SocketIO(app)
+socketio = SocketIO(app,cors_allowed_origins="*")
 login_manager= LoginManager(app)
 bcrypt = Bcrypt(app)
 
@@ -64,10 +64,11 @@ def logout():
 def chat():
     return render_template('chat.html',username=current_user.id)
 
-@socketio.on('message')
+@socketio.on('chat_message')
 def handle_message(msg):
     print(f"Received Message: {msg}")
-    send({'msg':msg['msg'],'user':msg['user']},broadcast= True)
+    send({'msg': msg['msg'], 'user': msg['user']}, broadcast=True)
+
 
 
 if __name__ =='__main__':
